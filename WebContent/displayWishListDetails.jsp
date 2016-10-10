@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -49,24 +50,40 @@ Wish List content
 <br/>
 
 <table>
+<%!Set<Integer> ids=null;
+   ArrayList<Product> products = null;%>
+
 <%
 //		TODO:1 If the attribute(shoppingCart) exists, retrieve product ids from it.
+		ShoppingCart cart = (ShoppingCart)request.getAttribute("shoppingCart");
+		if(cart!=null){
+			 ids = cart.getProductSet();
+			 System.out.println(ids.size());
+		}
 
 //		TODO:2	Scan all productids retrieved from Cart and maintain a list of corresponding products	
 //		Note: You can get details of product(value) based on productid(key) 
 //		using member variable "productEntries"
 
-%>
-
+    	products = new ArrayList<Product>();
+	
+		if(ids !=null){
+			for(int productID : ids){
+				Product product = productEntries.get(productID);  %>
 <%-- 
 		TODO:3	display product details in tabular format as HTTP response(text/html) to the web-client
 --%>
-
 			<tr>
-				<td><%-- TODO:4 required JSP EXPRESSION to display id of product--%></td>
-				<td><%-- TODO:5 required JSP EXPRESSION to display name of product--%></td>
-				<td><%-- TODO:6 required JSP EXPRESSION to display price of product--%></td>
+				<td><%=product.getId()%><%-- TODO:4 required JSP EXPRESSION to display id of product--%></td>
+				<td><%=product.getName() %><%-- TODO:5 required JSP EXPRESSION to display name of product--%></td>
+				<td><%=product.getPrice()%><%-- TODO:6 required JSP EXPRESSION to display price of product--%></td>
 			</tr>
+	
+	<%
+				products.add(product);
+			}
+	}
+	%>
 	
 
 </table>

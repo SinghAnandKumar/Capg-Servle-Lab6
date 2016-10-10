@@ -21,7 +21,7 @@
 			
 			repositoryRef = new ProductsRepositoryInMemoryImpl();
 			productEntries = repositoryRef.getProductEntries();
-			System.out.println("productEntries "+ productEntries);
+			//System.out.println("productEntries "+ productEntries);
 		}
 %>
 
@@ -31,14 +31,8 @@
 <%-- Write a scriptlet to display product name and its id as checkboxes 
 			from "productEntries" member variable--%>
 
-<!-- 
-	FOR EXAMPLE :----------
-	
-	<input type="checkbox" name="bookID" 
-				value="<%-- it should be product id from repository--%>"
-				/><%-- name of the product--%>
- -->
 <%
+	
 		Set<Integer> ids = productEntries.keySet();
 
 		for(int productID : ids){
